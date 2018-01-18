@@ -1,7 +1,70 @@
 一.安装
+npm install;安装modules
+查看安装的所有包：npm list -g --depth 0
+Node -v
+Npm -v 安装好node.js后查看一下版本
+安装express框架：
+npm install -g express-generator
+express（有一个你确定安装吗？键入y）
+npm install（安装express及依赖）
+express --version，
+express -e jizhi ;在此目录下创建一个jizhi
+之后开始npm
+Npm init 初始化包，自动生成package.json。
 二.FS文件模块
+1.读文件
+//readFile(文件名，回调函数)
+const fs=require("fs");
+fs.readFile("a.txt",function(err,data){
+	if(err){
+		console.log("读取失败！");
+	}else{
+		console.log(data.toString());	
+		}
+});
+2.写文件
+//writeFile(文件名，内容，回调函数)
+const fs=require("fs");
+fs.writeFile("a.txt","awda wdo",function(err){
+	console.log(err);
+});
 三.http数据解析
+1.Get(数据在URL中)
+<form action="http://localhost:8080/" method="get">
+Get数据解析：
+使用Url：
+
+
+const http=require("http");
+const urlLib=require("url");
+http.createServer(function(req,res){
+    console.log("服务启动");
+    var obj=urlLib.parse(req.url,true);
+    var url=obj.pathname;
+    var GET=obj.query;
+    console.log(url,GET);
+    res.write("成功了");
+	res.end();
+}).listen(8080);
+
+2.post(数据不在URL中)
+POST数据比GET数据大得多。所以需要分段发送。
+var str = '';
+        // 数据量大的时候可能会执行很多次
+        req.on('data',function(data){
+            // 结果类似xxx=xxx&&yyy=yyy
+            str += data;
+            
+        });
+        req.on('end',function(){
+            // 解析输出
+            var POST = querystring.parse(str);
+            console.log(POST);
+        });
+        res.end();
 四．对文件/接口的访问
+1.文件（其余均是文件）
+2.接口（访问uesr的）
 五.前台往后台发送数据
 六.实例（登录注册）
 七．模块化
