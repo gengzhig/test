@@ -1,2 +1,27 @@
 AJAX学习心得
-1.Ajax
+1.Ajax的目的：将服务器中的东西读取出来到前端
+2.实例
+ajax.js文件
+function ajax(url,fuSucc,fnFaild){
+	var xhr=new XMLHttpRequest();
+	xhr.open("GET",url,true);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.send("fname=Henry&lname=Ford");
+	xhr.onreadystatechange=function(){
+		if (xhr.readyState==4&&xhr.status==200) {
+			fuSucc(xhr.responseText);
+		}else{
+			if (fnFaild) {
+				fnFaild(xhr.status);
+			}
+		}
+	};
+}
+
+
+使用的时候，先引用ajax.js,然后直接用就行。
+3.缓存
+ajax("1.txt?t="+new Date().getTime(),function(str){
+				p1.innerHTML=str;
+			});
+每一毫秒改变url后面的值，从而清除浏览器缓存。
