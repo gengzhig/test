@@ -28,3 +28,36 @@ ajax("1.txt?t="+new Date().getTime(),function(str){
 4.实例（Ajax读取动态数据）
 josn数据，
 使用了eval();
+5.实例
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Ajax实例</title>
+		<script src="./js/ajax.js"></script>
+	</head>
+	<body>
+		 邮箱：<input type="email" name="email" id="t1"><br>
+		 <input type="button" value="登录" id="t2"><br>
+		 <p id="p">状态</p>
+	</body>
+	<script>
+		var t1=document.getElementById("t1");
+		var t2=document.getElementById("t2");
+		var p=document.getElementById("p");
+		var re=/^\w+@[a-z0-9]+\.[a-z]+$/i;
+		t1.oninput=function(){
+		//使用Ajax异步刷新登录状态
+		    if (re.test(t1.value)) {
+				p.innerHTML="nice!";
+				console.log(t1.value);
+			} else {
+				p.innerHTML="邮箱输入格式有误";
+				console.log("error!");
+			}
+		
+		};
+		
+           
+	</script>
+</html>
