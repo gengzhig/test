@@ -25,4 +25,6 @@ ajax("1.txt?t="+new Date().getTime(),function(str){
 				p1.innerHTML=str;
 			});
 每一毫秒改变url后面的值，从而清除浏览器缓存。
-4.实例（Ajax读取动态文件）
+4.实例（Ajax读取动态数据）
+josn数据，
+使用了eval();
