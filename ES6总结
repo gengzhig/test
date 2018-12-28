@@ -1,0 +1,191 @@
+
+1.变量
+Var 缺陷：
+可以重复声明
+无法限制修改
+没有块级作用域
+Let:不能重复声明，变量，可以修改，块级作用域
+Const:不能重复声明，常量，不能修改，块级作用域
+eg:
+<input type="button" value="按钮0">
+<input type="button" value="按钮1">
+<input type="button" value="按钮2">
+<script >
+var oBtn=document.getElementsByTagName("input");
+for(var i=0;i<oBtn.length;i++){
+oBtn[i].onclick=function(){
+alert(i);
+}
+}
+</script>
+
+传统的var 定义只会让每个按钮点击弹出一个3，现在使用let定义就会解决这个问题。
+2.函数
+2.1箭头函数
+window.onload=function(){
+alert(233);
+};
+window.onload=()=>{
+alert(233);
+}
+
+如果只有一个参数，（）可以省略。
+如果只有一个return，{}可以省略。
+var show=a=>a*2;
+alert(show(9)); 
+2.2函数参数
+参数扩展/数组展开：
+...args(剩余参数)，使用的时候必须放在所有参数的最后才行。
+如果你a,b,...args,c 这样是不行的。
+Eg1:
+function show(a,b,...args){
+alert(a);
+alert(b);
+alert(args);
+} 
+show(14,13,23,2425,35);
+Eg2:
+function show(...args){
+fn(...args);
+} 
+function fn(a,b){
+alert(a+b);
+}
+show(14,13);
+
+默认参数：
+function show(a=1,b=2,c=3){
+console.log(a,b,c);
+}
+show(4,5,6);
+有参数用新的，没有用原来的。
+2.3解构赋值
+let [b,c,d]=[1,2,4];
+console.log(b,c,d);
+保证一一对应就行了。即左右边结构必须一样。
+右边必须是一个合法的东西，如出现{a,b}就不行，不是JSON也不是数组。
+3.数组
+Map(映射） 
+
+Foreach(迭代)
+arr.forEach((element,index) => {
+console.log(index+":"+element); 
+});
+
+Filter(过滤器)
+let arr=[12,3,234,4564,4635,122,5,2,1];
+//filter(过滤器)
+let result=arr.filter(function(item){
+return item<100;
+});
+console.log(result);
+
+Reduce(汇总)
+let arr=[12,3,234,4564,4635,122,5];
+let result=arr.reduce(function(temp,item,index){
+if (index!=arr.length-1) {
+return temp+item;// 不是最后一次
+} else {
+return (temp+item)/arr.length;//最后一次
+}
+});
+
+4.字符串
+startsWith(新方法)
+let str='http://baodu.com';
+if (str.startsWith("http")) {
+console.log("普通网址");
+} else if(str.startsWith("https")) {
+console.log("加密网址");
+}else{
+console.log("其他网址");
+}
+
+endsWith(新方法)
+同理上面startWith使用方法，可以用来检验一个文件的类型。
+字符串模板
+字符串连接：
+使用``，叫反单引号，允许折行
+
+let str=`adadad
+adad`;
+console.log(str);
+直接把东西放进字符串里面，
+${a}
+
+let a=12;
+let str=`adadad${a}
+adad`;
+console.log(str);
+
+5.面向对象
+新写法:
+class关键字，构造器和类分开了。
+Class里面直接加方法。
+class User{
+constructor(name,pass){
+this.name=name;
+this.pass=pass;
+}
+showName(){
+alert(this.name);
+}
+showPass(){
+alert(this.pass);
+}
+}
+var ul=new User("jizhi","123");
+ul.showName();
+ul.showPass();
+
+
+ 继承：	
+使用extends,super(父类)
+class superVip extends User{
+constructor(name,pass,level){
+super(name,pass);
+this.level=level;
+}
+showLevel(){
+alert(this.level);
+}
+}
+var u2=new superVip("guapi","345",2);
+u2.showName();
+u2.showPass();
+u2.showLevel();
+
+6.JSON
+json对象
+JSON.stringify，将JSON字符串化
+let json={"a":12,"b":34};
+console.log(JSON.stringify(json));
+
+JSON.parse,将字符串解析成JSON对象
+let json=`{"a":12,"b":34}`;
+console.log(JSON.parse(json));
+
+简写
+名字和值一样的时候，写一个也可以。
+let a=12;
+let b=5;
+let json={a,b};
+console.log(json);
+
+json里面出现函数的时候，function也可以省略。
+
+7.Promise
+8.Generator
+中间可以停下来的函数。
+function *show(){
+alert(1);
+yield;
+alert(2);
+}
+let b=show();
+b.next();
+b.next(); 
+Yield即让函数在此停住。
+generation实质是把一个函数切割成两个函数。
+把show切割成show1和show2；
+9.模块化
