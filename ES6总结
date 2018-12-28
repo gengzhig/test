@@ -175,6 +175,17 @@ console.log(json);
 json里面出现函数的时候，function也可以省略。
 
 7.Promise
+
+      Promise.all([ $.ajax({url:"1.txt",dataType:"text"}),
+                    $.ajax({url:"2.txt",dataType:"text"}) 
+                ]).then(function(data){
+                    
+                    let [res1,res2]=data;
+                    console.log("1.txt的内容是:"+res2);
+                    console.log("2.txt的内容是:"+res2);
+                },function(err){
+                    alert("出错了");
+                });
 8.Generator
 中间可以停下来的函数。
 function *show(){
